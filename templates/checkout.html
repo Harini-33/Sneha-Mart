@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout - SnehaMart</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <h1>🛍 SnehaMart Checkout</h1>
+</header>
+
+{% if cart %}
+
+<table>
+
+<tr>
+    <th>Image</th>
+    <th>Product</th>
+    <th>Brand</th>
+    <th>Price</th>
+</tr>
+
+{% for item in cart %}
+
+<tr>
+
+<td>
+<img src="{{ url_for('static', filename='image/' + item.image) }}"
+width="80"
+height="80">
+</td>
+
+<td>{{ item.name }}</td>
+
+<td>{{ item.brand }}</td>
+
+<td>₹{{ item.price }}</td>
+
+</tr>
+
+{% endfor %}
+
+<tr>
+
+<th colspan="3">Grand Total</th>
+
+<th>₹{{ total }}</th>
+
+</tr>
+
+</table>
+
+<br>
+
+<div align="center">
+
+<h2 style="color:green;">
+🎉 Thank You for Shopping with SnehaMart!
+</h2>
+
+<a href="{{ url_for('home') }}">
+<button class="checkout">
+Continue Shopping
+</button>
+</a>
+
+<a href="{{ url_for('clear') }}">
+<button class="clear">
+Clear Cart
+</button>
+</a>
+
+</div>
+
+{% else %}
+
+<h2 align="center">
+🛒 Your Cart is Empty
+</h2>
+
+<div align="center">
+
+<a href="{{ url_for('home') }}">
+<button class="checkout">
+Go Shopping
+</button>
+</a>
+
+</div>
+
+{% endif %}
+
+</body>
+</html>

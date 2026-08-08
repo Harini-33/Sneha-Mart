@@ -1,0 +1,287 @@
+/* ==========================================
+/* ==========================================
+   BODY
+========================================== */
+
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background-image: url("/static/model.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.header {
+    position: relative;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 50px;
+    color: #670000;
+}
+
+.cart-box {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+/* ==========================================
+   CART BOX
+========================================== */
+
+.cart-box {
+
+    width: 300px;
+
+    background-color: white;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+
+}
+
+
+.cart-box h2 {
+
+    text-align: center;
+
+    margin-top: 0;
+
+}
+
+
+/* ==========================================
+   CART ITEM
+========================================== */
+
+.cart-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid #ddd;
+
+}
+
+
+/* ==========================================
+   TOTAL BILL
+========================================== */
+
+.bill-total {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-top: 15px;
+
+}
+
+
+/* ==========================================
+   CLEAR CART
+========================================== */
+
+.clear-button {
+
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 10px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background-color: #555;
+
+    color: white;
+
+    cursor: pointer;
+
+}
+
+
+/* ==========================================
+   VIEW ITEMS
+========================================== */
+#viewButton {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.view-items-btn {
+    padding: 18px 45px;
+    font-size: 22px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: brown;
+    color: white;
+}
+
+
+.view-items-btn:hover {
+
+    background-color: #5c2e0b;
+
+}
+
+
+/* ==========================================
+   PRODUCTS
+========================================== */
+
+#productsSection {
+
+    display: none;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+}
+
+
+/* ==========================================
+   PRODUCT CARD
+========================================== */
+
+.product-card {
+
+    background-color: rgb(197, 191, 195);
+
+    padding: 20px;
+
+    text-align: center;
+
+    border-radius: 15px;
+
+    box-shadow: 0 4px 10px rgb(54, 0, 0);
+
+}
+
+
+.product-card img {
+
+    width: 180px;
+
+    height: 180px;
+
+    object-fit: contain;
+
+}
+
+
+.product-card h2 {
+
+    margin: 10px 0;
+
+}
+
+
+.product-card h3 {
+
+    font-size: 20px;
+
+}
+
+
+/* ==========================================
+   ADD CART BUTTON
+========================================== */
+
+.cart-button {
+
+    padding: 10px 20px;
+
+    background-color: rgb(42, 50, 165);
+
+    color: rgb(241, 236, 240);
+
+    border: none;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+.cart-button:hover {
+
+    background-color: #5c2e0b;
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+
+    .header {
+
+        flex-direction: column;
+
+        gap: 25px;
+
+    }
+
+
+    .cart-box {
+
+        width: auto;
+
+    }
+
+
+    #productsSection {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .product-card img {
+
+        width: 150px;
+
+        height: 150px;
+
+    }
+
+}

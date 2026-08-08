@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sneha Beauty Products</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<div class="header">
+
+
+    <h1>
+        Sneha Beauty Products
+    </h1>
+
+
+    <!-- CART -->
+
+    <div class="cart-box">
+
+        <h2>
+            🛒 My Cart
+        </h2>
+
+
+        <!-- CART ITEMS -->
+
+        <div id="cartItems">
+
+
+            {% if cart %}
+
+
+                {% for item in cart %}
+
+
+                <div class="cart-item">
+
+                    <span>
+                        {{ item.name }}
+                    </span>
+
+                    <span>
+                        ₹{{ item.price }}
+                    </span>
+
+                </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <p id="emptyCart">
+                    Cart is empty
+                </p>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- TOTAL -->
+
+        <div class="bill-total">
+
+            <strong>
+                Total Bill:
+            </strong>
+
+            <span>
+                ₹<span id="cartTotal">{{ total }}</span>
+            </span>
+
+        </div>
+
+
+        <!-- CLEAR CART -->
+
+        <button
+            class="clear-button"
+            onclick="clearCart()">
+            Clear Cart
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ==========================================
+     VIEW ITEMS BUTTON
+========================================== -->
+
+<div id="viewButton">
+
+    <button
+        class="view-items-btn"
+        onclick="viewItems()">
+
+        View Items
+
+    </button>
+
+</div>
+
+
+
+<!-- ==========================================
+     PRODUCTS
+========================================== -->
+
+<div id="productsSection">
+
+
+    {% for product in products %}
+
+
+    <div class="product-card">
+
+
+        <!-- IMAGE -->
+
+        <img
+            src="{{ url_for('static', filename='image/' + product.image) }}"
+            alt="{{ product.name }}"
+        >
+
+
+        <!-- NAME -->
+
+        <h2>
+            {{ product.name }}
+        </h2>
+
+
+        <!-- BRAND -->
+
+        <p>
+            {{ product.brand }}
+        </p>
+
+
+        <!-- PRICE -->
+
+        <h3>
+            ₹{{ product.price }}
+        </h3>
+
+
+        <!-- ADD TO CART -->
+
+        <button
+            class="cart-button"
+            onclick="addToCart({{ product.id }})">
+
+            Add to Cart
+
+        </button>
+
+
+    </div>
+
+
+    {% endfor %}
+
+
+</div>
+
+
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script>
+
+
+// ==========================================
+// VIEW ITEMS
+// ==========================================
+
+function viewItems() {
+
+    document.getElementById("productsSection").style.display = "grid";
+
+    document.getElementById("viewButton").style.display = "none";
+
+}
+
+
+
+// ==========================================
+// ADD TO CART
+// ==========================================
+
+function addToCart(productId) {
+
+
+    fetch("/add/" + productId)
+
+
+        .then(response => response.json())
+
+
+        .then(data => {
+
+
+            if (data.success) {
+
+
+                // UPDATE TOTAL
+
+                document.getElementById("cartTotal").innerText =
+                    data.total;
+
+
+                // CREATE CART HTML
+
+                let cartHTML = "";
+
+
+                data.cart.forEach(function(item) {
+
+
+                    cartHTML += `
+
+                        <div class="cart-item">
+
+                            <span>
+                                ${item.name}
+                            </span>
+
+                            <span>
+                                ₹${item.price}
+                            </span>
+
+                        </div>
+
+                    `;
+
+
+                });
+
+
+                // DISPLAY CART
+
+                document.getElementById("cartItems").innerHTML =
+                    cartHTML;
+
+
+            }
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+        });
+
+}
+
+
+
+// ==========================================
+// CLEAR CART
+// ==========================================
+
+function clearCart() {
+
+
+    fetch("/clear")
+
+
+        .then(() => {
+
+            location.reload();
+
+        });
+
+
+}
+
+</script>
+
+
+</body>
+
+</html>
